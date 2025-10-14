@@ -23,7 +23,6 @@ body {
 
 .key {
   font-size: inherit;
-  grid-column: span 2;
   border: none;
   padding: 0;
   display: flex;
@@ -42,8 +41,63 @@ body {
   user-select: none;
 }
 
-.key.large {
+.key.digit {
+  grid-column: span 1;
+  background-color: hsl(220, 2%, 29%);
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.key.underHundred {
+  background-color: hsl(220, 2%, 29%);
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.key.zero {
+  grid-column: span 2;
+}
+
+.key.one {
   grid-column: span 3;
+}
+
+.key.two {
+  grid-column: span 4;
+}
+
+.key.three {
+  grid-column: span 5;
+}
+
+.key.four {
+  grid-column: span 6;
+}
+
+.key.five {
+  grid-column: span 7;
+}
+
+.key.six {
+  grid-column: span 8;
+}
+
+.key.seven {
+  grid-column: span 9;
+}
+
+.key.eight {
+  grid-column: span 10;
+}
+
+.key.nine {
+  grid-column: span 11;
+}
+
+.key.ten {
+  grid-column: span 12;
+}
+
+.key.eleven {
+  grid-column: span 13;
 }
 
 .key > svg {
