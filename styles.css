@@ -1,4 +1,6 @@
-*, *::after, *::before {
+*,
+*::after,
+*::before {
   box-sizing: border-box;
   font-family: Arial;
 }
@@ -13,6 +15,16 @@ body {
   font-size: clamp(.5rem, 2.5vmin, 1.5rem);
 }
 
+h1 {
+  text-align: center;
+  color: white;
+}
+
+button::before {
+  content: attr(data-key);
+  font-size: clamp(.5rem, 2.5vmin, 1.5rem);
+}
+
 .keyboard {
   display: grid;
   grid-template-columns: repeat(20, minmax(auto, 1.25em));
@@ -22,17 +34,12 @@ body {
 }
 
 .key {
-  font-size: inherit;
+  font-size: 6pt;
   border: none;
   padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: hsl(
-    var(--hue, 200),
-    var(--saturation, 1%),
-    calc(var(--lightness-offset, 0%) + var(--lightness, 51%))
-  );
+  background-color: hsl(var(--hue, 200),
+      var(--saturation, 1%),
+      calc(var(--lightness-offset, 0%) + var(--lightness, 51%)));
   color: white;
   fill: white;
   text-transform: uppercase;
@@ -100,12 +107,13 @@ body {
   grid-column: span 13;
 }
 
-.key > svg {
+.key>svg {
   width: 1.75em;
   height: 1.75em;
 }
 
-.key:hover, .key:focus {
+.key:hover,
+.key:focus {
   --lightness-offset: 10%;
 }
 
@@ -209,23 +217,23 @@ body {
 @keyframes dance {
   20% {
     transform: translateY(-50%);
-  }  
+  }
 
   40% {
     transform: translateY(5%);
-  }  
+  }
 
   60% {
     transform: translateY(-25%);
-  }  
+  }
 
   80% {
     transform: translateY(2.5%);
-  }  
+  }
 
   90% {
     transform: translateY(-5%);
-  }  
+  }
 
   100% {
     transform: translateY(0);
@@ -259,9 +267,4 @@ body {
 
 .alert.hide {
   opacity: 0;
-}
-
-h1 {
-  text-align: center;
-  color: white;
 }

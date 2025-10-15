@@ -11,69 +11,69 @@ const targetWord = targetWords[Math.floor(Math.random() * targetWords.length)].t
 startInteraction()
 
 function startInteraction() {
-  document.addEventListener("click", handleMouseClick)
-  document.addEventListener("keydown", handleKeyPress)
+	document.addEventListener("click", handleMouseClick)
+	document.addEventListener("keydown", handleKeyPress)
 }
 
 function stopInteraction() {
-  document.removeEventListener("click", handleMouseClick)
-  document.removeEventListener("keydown", handleKeyPress)
+	document.removeEventListener("click", handleMouseClick)
+	document.removeEventListener("keydown", handleKeyPress)
 }
 
 function handleMouseClick(e) {
-  if (e.target.matches("[data-key]")) {
-    pressKey(e.target.dataset.key)
-    return
-  }
+	if (e.target.matches("[data-key]")) {
+		pressKey(e.target.dataset.key)
+		return
+	}
 
-  if (e.target.matches("[data-enter]")) {
-    submitGuess()
-    return
-  }
+	if (e.target.matches("[data-enter]")) {
+		submitGuess()
+		return
+	}
 
-  if (e.target.matches("[data-delete]")) {
-    deleteKey()
-    return
-  }
+	if (e.target.matches("[data-delete]")) {
+		deleteKey()
+		return
+	}
 }
 
 function handleKeyPress(e) {
-  if (e.key === "Enter") {
-    submitGuess()
-    return
-  }
+	if (e.key === "Enter") {
+		submitGuess()
+		return
+	}
 
-  else if (e.key === "Backspace" || e.key === "Delete") {
-    deleteKey()
-    return
-  }
+	else if (e.key === "Backspace" || e.key === "Delete") {
+		deleteKey()
+		return
+	}
 
-  else if (e.key === "Shift") {
+	else if (e.key === "Shift") {
 
-  }
+	}
 
-  else {
-    pressKey(e.key.toLowerCase())
-    return
-  }
+	else {
+		pressKey(e.key.toLowerCase())
+		return
+	}
 }
 
 function pressKey(key) {
-  const activeTiles = getActiveTiles()
-  if (activeTiles.length >= WORD_LENGTH) return
-  const nextTile = guessGrid.querySelector(":not([data-letter])")
-  nextTile.dataset.letter = key.toLowerCase()
-  nextTile.textContent = key
-  nextTile.dataset.state = "active"
+	const activeTiles = getActiveTiles()
+	if (activeTiles.length >= WORD_LENGTH) return
+	const nextTile = guessGrid.querySelector(":not([data-letter])")
+	nextTile.dataset.letter = key.toLowerCase()
+	nextTile.textContent = key
+	nextTile.dataset.state = "active"
 }
 
 function deleteKey() {
-  const activeTiles = getActiveTiles()
-  const lastTile = activeTiles[activeTiles.length - 1]
-  if (lastTile == null) return
-  lastTile.textContent = ""
-  delete lastTile.dataset.state
-  delete lastTile.dataset.letter
+	const activeTiles = getActiveTiles()
+	const lastTile = activeTiles[activeTiles.length - 1]
+	if (lastTile == null) return
+	lastTile.textContent = ""
+	delete lastTile.dataset.state
+	delete lastTile.dataset.letter
 }
 
 function submitGuess() {
@@ -200,63 +200,63 @@ function flipTile(tile, index, array, guess, className) {
 }
 
 function getActiveTiles() {
-  return guessGrid.querySelectorAll('[data-state="active"]')
+	return guessGrid.querySelectorAll('[data-state="active"]')
 }
 
 function showAlert(message, duration = 1000) {
-  const alert = document.createElement("div")
-  alert.textContent = message
-  alert.classList.add("alert")
-  alertContainer.prepend(alert)
-  if (duration == null) return
+	const alert = document.createElement("div")
+	alert.textContent = message
+	alert.classList.add("alert")
+	alertContainer.prepend(alert)
+	if (duration == null) return
 
-  setTimeout(() => {
-    alert.classList.add("hide")
-    alert.addEventListener("transitionend", () => {
-      alert.remove()
-    })
-  }, duration)
+	setTimeout(() => {
+		alert.classList.add("hide")
+		alert.addEventListener("transitionend", () => {
+			alert.remove()
+		})
+	}, duration)
 }
 
 function shakeTiles(tiles) {
-  tiles.forEach(tile => {
-    tile.classList.add("shake")
-    tile.addEventListener(
-      "animationend",
-      () => {
-        tile.classList.remove("shake")
-      },
-      { once: true }
-    )
-  })
+	tiles.forEach(tile => {
+		tile.classList.add("shake")
+		tile.addEventListener(
+			"animationend",
+			() => {
+				tile.classList.remove("shake")
+			},
+			{ once: true }
+		)
+	})
 }
 
 function checkWinLose(guess, tiles) {
-  if (guess === targetWord) {
-    showAlert("You Win", 5000)
-    danceTiles(tiles)
-    stopInteraction()
-    return
-  }
+	if (guess === targetWord) {
+		showAlert("You Win", 5000)
+		danceTiles(tiles)
+		stopInteraction()
+		return
+	}
 
-  const remainingTiles = guessGrid.querySelectorAll(":not([data-letter])")
-  if (remainingTiles.length === 0) {
-    showAlert(targetWord.toUpperCase(), null)
-    stopInteraction()
-  }
+	const remainingTiles = guessGrid.querySelectorAll(":not([data-letter])")
+	if (remainingTiles.length === 0) {
+		showAlert(targetWord.toUpperCase(), null)
+		stopInteraction()
+	}
 }
 
 function danceTiles(tiles) {
-  tiles.forEach((tile, index) => {
-    setTimeout(() => {
-      tile.classList.add("dance")
-      tile.addEventListener(
-        "animationend",
-        () => {
-          tile.classList.remove("dance")
-        },
-        { once: true }
-      )
-    }, (index * DANCE_ANIMATION_DURATION) / 5)
-  })
+	tiles.forEach((tile, index) => {
+		setTimeout(() => {
+			tile.classList.add("dance")
+			tile.addEventListener(
+				"animationend",
+				() => {
+					tile.classList.remove("dance")
+				},
+				{ once: true }
+			)
+		}, (index * DANCE_ANIMATION_DURATION) / 5)
+	})
 }
